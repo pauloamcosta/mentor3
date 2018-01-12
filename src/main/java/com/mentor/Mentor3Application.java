@@ -45,7 +45,7 @@ public class Mentor3Application implements CommandLineRunner {
 		cat3.getDemandas().addAll(Arrays.asList(d2));
 		
 		d1.getCategorias().addAll(Arrays.asList(cat1));
-		d2.getCategorias().addAll(Arrays.asList(cat1, cat2));
+		d2.getCategorias().addAll(Arrays.asList(cat1, cat3));
 			
 		
 		categoriaRepository.save(Arrays.asList(cat1, cat2, cat3, cat4));

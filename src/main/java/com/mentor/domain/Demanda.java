@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 @Entity
 public class Demanda implements Serializable { 
@@ -31,6 +33,7 @@ public class Demanda implements Serializable {
 	private Boolean publicadoMural;
 	private String posicaoAtual;
 	
+	@JsonBackReference
 	@ManyToMany
 	@JoinTable(name = "DEMANDA_CATEGORIA",
 		joinColumns = @JoinColumn(name = "demanda_id"),

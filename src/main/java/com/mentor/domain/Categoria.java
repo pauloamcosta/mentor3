@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Categoria implements Serializable { 
 	
@@ -19,7 +21,7 @@ public class Categoria implements Serializable {
 	private Integer Id;
 	private String nome;
 	
-	
+	@JsonManagedReference
 	@ManyToMany(mappedBy="categorias") //informando que o mapeamento foi feito do outro lado
 	private List<Demanda> demandas = new ArrayList<>(); //fazendo a associação de uma categoria ter várias demandas
 	
