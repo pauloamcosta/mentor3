@@ -11,8 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.mentor.domain.enums.TipoUsuario;
+
 @Entity
-public class Subsecao implements Serializable { 
+public class Usuario implements Serializable { 
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -20,20 +22,25 @@ public class Subsecao implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	private String usuario;
+	private String senha;
+	private Integer tipo;
 	
 	@JsonBackReference
-	@OneToMany(mappedBy="subsecao")
-	private List<Setor> setores = new ArrayList<>();
+	@OneToMany(mappedBy="usuarioAgente")
+	private List<Demanda> demandasUsuario = new ArrayList<>();
 	
-	public Subsecao(){
-		
+	private Usuario() {
 		
 	}
 
-	public Subsecao(Integer id, String nome) {
+	public Usuario(Integer id, String nome, String usuario, String senha, TipoUsuario tipo) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.usuario = usuario;
+		this.senha = senha;
+		this.tipo = tipo.getCod();
 	}
 
 	public Integer getId() {
@@ -52,14 +59,43 @@ public class Subsecao implements Serializable {
 		this.nome = nome;
 	}
 
-	public List<Setor> getSetores() {
-		return setores;
+	public String getUsuario() {
+		return usuario;
 	}
 
-	public void setSetores(List<Setor> setores) {
-		this.setores = setores;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public TipoUsuario getTipo() {
+		return TipoUsuario.toEnum(tipo);
+	}
+
+	public void setTipo(TipoUsuario tipo) {
+		this.tipo = tipo.getCod();
+	}
+
+	/**
+	 * @return the demandasUsuario
+	 */
+	public List<Demanda> getDemandasUsuario() {
+		return demandasUsuario;
+	}
+
+	/**
+	 * @param demandasUsuario the demandasUsuario to set
+	 */
+	public void setDemandasUsuario(List<Demanda> demandasUsuario) {
+		this.demandasUsuario = demandasUsuario;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -76,7 +112,7 @@ public class Subsecao implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Subsecao other = (Subsecao) obj;
+		Usuario other = (Usuario) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -84,5 +120,6 @@ public class Subsecao implements Serializable {
 			return false;
 		return true;
 	}
-	
+
+
 }

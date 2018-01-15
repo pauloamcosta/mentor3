@@ -11,8 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
@@ -33,6 +35,16 @@ public class Demanda implements Serializable {
 	private Boolean publicadoMural;
 	private String posicaoAtual;
 	
+	@JsonManagedReference
+	@ManyToOne
+	@JoinColumn(name="setor_id")
+	private Setor setor;
+	
+	@JsonManagedReference
+	@ManyToOne
+	@JoinColumn(name="usuario_id")
+	private Usuario usuarioAgente;
+	
 	@JsonBackReference
 	@ManyToMany
 	@JoinTable(name = "DEMANDA_CATEGORIA",
@@ -47,7 +59,7 @@ public class Demanda implements Serializable {
 	}
 
 	public Demanda(Integer id, String nome, String autor, String email, String descricao, String dataRecebimento, String data5dias, Boolean feedInicial,
-			Boolean feed5dias, Boolean publicadoMural, String posicaoAtual) {
+			Boolean feed5dias, Boolean publicadoMural, String posicaoAtual, Setor setor, Usuario usuarioAgente) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -60,6 +72,8 @@ public class Demanda implements Serializable {
 		this.feed5dias = feed5dias;
 		this.publicadoMural = publicadoMural;
 		this.posicaoAtual = posicaoAtual;
+		this.setor = setor;
+		this.usuarioAgente = usuarioAgente;
 	}
 
 	public Integer getId() {
@@ -140,6 +154,24 @@ public class Demanda implements Serializable {
 
 	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
+	}
+	
+
+	public Setor getSetor() {
+		return setor;
+	}
+
+	public void setSetor(Setor setor) {
+		this.setor = setor;
+	}
+	
+
+	public Usuario getUsuarioAgente() {
+		return usuarioAgente;
+	}
+
+	public void setUsuarioAgente(Usuario usuarioAgente) {
+		this.usuarioAgente = usuarioAgente;
 	}
 
 	@Override

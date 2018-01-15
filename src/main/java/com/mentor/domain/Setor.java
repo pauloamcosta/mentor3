@@ -1,6 +1,8 @@
 package com.mentor.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Setor implements Serializable { 
@@ -20,9 +26,15 @@ public class Setor implements Serializable {
 	private Integer id;
 	private String nome;
 	
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name="subsecao_id")
 	private Subsecao subsecao;
+	
+	@JsonBackReference
+	@OneToMany(mappedBy="setor")
+	private List<Demanda> demandasSetor = new ArrayList<>();
+
 	
 	public Setor() {
 		
@@ -58,6 +70,20 @@ public class Setor implements Serializable {
 	public void setSubsecao(Subsecao subsecao) {
 		this.subsecao = subsecao;
 	}
+	
+	/**
+	 * @return the demandasSetor
+	 */
+	public List<Demanda> getDemandasSetor() {
+		return demandasSetor;
+	}
+
+	/**
+	 * @param demandasSetor the demandasSetor to set
+	 */
+	public void setDemandasSetor(List<Demanda> demandasSetor) {
+		this.demandasSetor = demandasSetor;
+	}
 
 	@Override
 	public int hashCode() {
@@ -83,4 +109,6 @@ public class Setor implements Serializable {
 			return false;
 		return true;
 	}
+
+
 }

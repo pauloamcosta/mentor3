@@ -9,21 +9,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mentor.domain.Categoria;
-import com.mentor.services.CategoriaService;
+import com.mentor.domain.Usuario;
+import com.mentor.services.UsuarioService;
 
 @RestController
-@RequestMapping(value="/categorias")
-public class CategoriaResources {
+@RequestMapping(value="/usuarioAgente")
+public class UsuarioResource {
 	
 	@Autowired
-	private CategoriaService service;
+	private UsuarioService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Categoria obj = service.buscar(id);
+		Usuario obj = service.buscar(id);
 		return ResponseEntity.ok().body(obj);
-
+		
+		
 		
 	}
 
