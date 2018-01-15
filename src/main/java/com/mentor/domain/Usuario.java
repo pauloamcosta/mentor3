@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mentor.domain.enums.TipoUsuario;
 
 @Entity
@@ -26,7 +26,7 @@ public class Usuario implements Serializable {
 	private String senha;
 	private Integer tipo;
 	
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy="usuarioAgente")
 	private List<Demanda> demandasUsuario = new ArrayList<>();
 	

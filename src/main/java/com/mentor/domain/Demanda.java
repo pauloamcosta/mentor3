@@ -13,8 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -35,17 +34,17 @@ public class Demanda implements Serializable {
 	private Boolean publicadoMural;
 	private String posicaoAtual;
 	
-	@JsonManagedReference
+	
 	@ManyToOne
 	@JoinColumn(name="setor_id")
 	private Setor setor;
 	
-	@JsonManagedReference
+	
 	@ManyToOne
 	@JoinColumn(name="usuario_id")
 	private Usuario usuarioAgente;
 	
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "DEMANDA_CATEGORIA",
 		joinColumns = @JoinColumn(name = "demanda_id"),

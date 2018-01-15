@@ -12,8 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Setor implements Serializable { 
@@ -26,12 +25,12 @@ public class Setor implements Serializable {
 	private Integer id;
 	private String nome;
 	
-	@JsonManagedReference
+	
 	@ManyToOne
 	@JoinColumn(name="subsecao_id")
 	private Subsecao subsecao;
 	
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy="setor")
 	private List<Demanda> demandasSetor = new ArrayList<>();
 
